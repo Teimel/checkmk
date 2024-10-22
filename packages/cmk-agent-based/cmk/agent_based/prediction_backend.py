@@ -75,3 +75,6 @@ def _start_of_day(timestamp: float) -> int:
     t = time.localtime(timestamp)
     sec_of_day = t.tm_hour * 3600 + t.tm_min * 60 + t.tm_sec
     return int(timestamp) - sec_of_day
+
+
+"asdf" + _start_of_day(1)
