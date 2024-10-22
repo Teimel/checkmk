@@ -45,6 +45,15 @@ pip.parse(
 use_repo(pip, "cmk_requirements")
 
 bazel_dep(name = "protobuf", version = "28.2", repo_name = "com_google_protobuf")
+bazel_dep(name = "rules_mypy", version = "0.9.0")
+
+types = use_extension("@rules_mypy//mypy:types.bzl", "types")
+types.requirements(
+    name = "pip_types",
+    pip_requirements = "@cmk_requirements//:requirements.bzl",
+    requirements_txt = "//packages/cmk-agent-based:requirements.txt",
+)
+use_repo(types, "pip_types")
 
 fork_cc_toolchain_config = use_repo_rule("//omd/packages/toolchain:fork_cc_toolchain_config.bzl", "fork_cc_toolchain_config")
 

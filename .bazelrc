@@ -95,5 +95,11 @@ build:iwyu --@bazel_iwyu//:iwyu_executable=//omd/packages/bazel_iwyu:iwyu_bin
 build:iwyu --@bazel_iwyu//:iwyu_opts="--error"
 build:iwyu --@bazel_iwyu//:iwyu_mappings=//omd/packages/bazel_iwyu:iwyu_mappings
 
+# register mypy_aspect with Bazel
+build --aspects //packages/cmk-agent-based:aspects.bzl%mypy_aspect
+
+# optionally, default enable the mypy checks
+build --output_groups=+mypy
+
 # Must be last
 try-import /etc/ci.bazelrc

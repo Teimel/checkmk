@@ -3,6 +3,16 @@ load("@aspect_rules_py//py:defs.bzl", "py_library", "py_pytest_main", "py_test")
 load("@cmk_requirements//:requirements.bzl", "requirement")
 load("@omd_packages//omd/packages/rules:package_wheel.bzl", "package_wheel")
 load("@rules_python//python:packaging.bzl", "py_wheel")
+load("@rules_mypy//mypy:mypy.bzl", "mypy_cli")
+
+#
+mypy_cli(
+    name = "mypy_cli",
+    mypy_requirement = requirement("mypy"),
+    deps = [
+        requirement("pydantic"),
+    ],
+)
 
 exports_files([
     "pyproject.toml",
@@ -13,6 +23,7 @@ exports_files([
 py_library(
     name = "cmk-agent-based",
     srcs = [
+        "cmk/__init__.py",
         "cmk/agent_based/prediction_backend.py",
         "cmk/agent_based/v0_unstable_legacy.py",
         "cmk/agent_based/v1/__init__.py",
