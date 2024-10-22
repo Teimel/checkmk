@@ -49,7 +49,7 @@ py_library(
     imports = ["."],
     visibility = ["//cmk:__pkg__"],
     deps = [
-        requirement("pydantic"),
+        # requirement("pydantic"),
     ],
 )
 
